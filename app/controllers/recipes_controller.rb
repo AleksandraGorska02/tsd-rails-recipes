@@ -11,6 +11,7 @@ def show
   @recipe = Recipe.find(params[:id])
   @ingredient = Ingredient.new(recipe: @recipe)
   @edit_ingredient_id = params[:edit_ingredient_id]&.to_i
+     # render json: @recipe.to_json
 end
 
   # GET /recipes/new

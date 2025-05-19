@@ -1,0 +1,33 @@
+<div id="<%= dom_id ingredient %>">
+  <% if local_assigns[:edit_ingredient_id] == ingredient.id %>
+    <!-- Render edit form inline -->
+    <%= form_with model: ingredient, local: true do |form| %>
+      <p>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </p>
+      <p>
+        <%= form.label :quantity %><br>
+        <%= form.number_field :quantity %>
+      </p>
+      <%= form.submit "Update", class: "rounded-lg py-3 px-5 bg-blue-100" %>
+
+      <%= link_to 'Cancel', recipe_path(ingredient.recipe), class: "ml-3 text-gray-500" %>
+    <% end %>
+
+  <% else %>
+    <!-- Show ingredient details -->
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Name:</strong>
+      <%= ingredient.name %>
+    </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Quantity:</strong>
+      <%= ingredient.quantity %>
+    </p>
+
+    <!-- Edit/Delete buttons -->
+    <%= link_to "Edit", recipe_path(ingredient.recipe, edit_ingredient_id: ingredient.id), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= button_to "Delete", ingredient_path(ingredient), method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 ml-2 px-5 bg-red-100 text-red-700 inline-block font-medium" %>
+  <% end %>
+</div>
